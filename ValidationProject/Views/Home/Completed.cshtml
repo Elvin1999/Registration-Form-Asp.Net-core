@@ -1,0 +1,56 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Completed";
+}
+
+
+<div class="bg-primary text-white m-1 p-1">
+    <h2>Register is completed . . . </h2>
+</div>
+
+<table class="table table-striped">
+    <tr>
+
+        <th>
+            Username
+        </th>
+        <td>
+            @Model.Username
+        </td>
+    </tr>
+    <tr>
+
+        <th>
+            Email
+        </th>
+        <td>
+            @Model.Email
+        </td>
+    </tr>
+    <tr>
+
+        <th>
+            Birthdate
+        </th>
+        <td>
+            @Model.Birthdate.ToString("d")
+        </td>
+    </tr>
+    <tr>
+
+        <th>
+            Terms Accepted
+        </th>
+        <td>
+
+            @if (Model.TermsAccepted)
+            {
+                <h3>Yes</h3>
+            }
+            else
+            {
+                <h3>No</h3>
+            }
+        </td>
+    </tr>
+</table>
