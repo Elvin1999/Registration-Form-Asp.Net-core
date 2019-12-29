@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ValidationProject.Models;
@@ -17,7 +18,33 @@ namespace ValidationProject.Controllers
         [HttpPost]
         public IActionResult Register(Register model)
         {
-            return View("Completed", model);
+            if (string.IsNullOrEmpty(model.Username))
+            {
+                ModelState.AddModelError(nameof(model.Username), "Username required");
+            }
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(model.Email);
+            if (!match.Success)
+            {
+                ModelState.AddModelError(nameof(model.Email), "Email is not correct format");
+            }
+            if (model.Password.Length < 6)
+            {
+                ModelState.AddModelError(nameof(model.Password), "Password's character count must be greater than 6 characters");
+            }
+            if (!model.TermsAccepted)
+            {
+                ModelState.AddModelError(nameof(model.TermsAccepted), "You have to accept all terms");
+            }
+            if (ModelState.IsValid)
+            {
+
+                return View("Completed", model);
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }
