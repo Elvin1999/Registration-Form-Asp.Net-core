@@ -22,16 +22,32 @@ namespace ValidationProject.Controllers
             {
                 ModelState.AddModelError(nameof(model.Username), "Username required");
             }
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(model.Email);
-            if (!match.Success)
+            if (string.IsNullOrEmpty(model.Email))
             {
-                ModelState.AddModelError(nameof(model.Email), "Email is not correct format");
+                ModelState.AddModelError(nameof(model.Email), "Email is required");
             }
-            if (model.Password.Length < 6)
+            else
             {
-                ModelState.AddModelError(nameof(model.Password), "Password's character count must be greater than 6 characters");
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match match = regex.Match(model.Email);
+                if (!match.Success)
+                {
+                    ModelState.AddModelError(nameof(model.Email), "Email is not correct format");
+                }
             }
+            if (string.IsNullOrEmpty(model.Password))
+            {
+                ModelState.AddModelError(nameof(model.Password), "Password is required");
+            }
+            else
+            {
+
+                if (model.Password.Length < 6)
+                {
+                    ModelState.AddModelError(nameof(model.Password), "Password's character count must be greater than 6 characters");
+                }
+            }
+            
             if (!model.TermsAccepted)
             {
                 ModelState.AddModelError(nameof(model.TermsAccepted), "You have to accept all terms");

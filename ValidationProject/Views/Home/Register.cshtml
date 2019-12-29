@@ -2,31 +2,44 @@
 @{
     ViewData["Title"] = "Register";
 }
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
 
+        $(function () {
+            $("input.input-validation-error")
+                .closest(".form-group")
+                .addClass("has-danger");
+        });
+
+    </script>
+}
 <div class="bg-primary text-white m-1 p-1">
     <h2>Register</h2>
 </div>
 
 <form class="p-1 m-1" asp-action="register" method="post">
-
-    <div class="form-group">
+    <div class="text-danger" asp-validation-summary="All" ></div>
+    <div class="form-group has-danger">
         <label asp-for="Email">Email</label>
         <input asp-for="Email" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group has-danger">
         <label asp-for="Username">Username</label>
         <input asp-for="Username" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="form-group has-danger">
         <label asp-for="Password">Password</label>
         <input asp-for="Password" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="form-group has-danger">
         <label asp-for="Birthdate">Birthdate</label>
         <input type="text" asp-for="Birthdate" asp-format="{0:d}" class="form-control" />
     </div>
-    <div class="radio form-group">
+    <div class="radio form-group has-danger">
         <input asp-for="TermsAccepted" />
         <label asp-for="TermsAccepted" class="form-check-label">
 
