@@ -22,8 +22,12 @@ namespace ValidationProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddMvc();
+
+            services.AddMvc().AddMvcOptions(options => options
+            .ModelBindingMessageProvider
+            .SetValueMustNotBeNullAccessor(msg => "Please,write any value")
+
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
